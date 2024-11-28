@@ -5,7 +5,7 @@
 https://documenter.getpostman.com/view/39376424/2sAYBXAAAX#ca1ef8db-da49-498f-8028-9764d10d16b0
 ----
 ### ERD 작성 - DB diagram 사용
-![스크린샷 2024-11-28 오후 5.43.19.png](../../%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-11-28%20%EC%98%A4%ED%9B%84%205.43.19.png)
+<img width="1259" alt="스크린샷 2024-11-28 오후 5 43 19" src="https://github.com/user-attachments/assets/4fe1da43-f432-4d36-a85c-2f5eb24dafb5">
 ----
 ### SQL 작성
 ```
