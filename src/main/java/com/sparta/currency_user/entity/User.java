@@ -2,6 +2,10 @@ package com.sparta.currency_user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,6 +16,9 @@ public class User {
 
     private String name;
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExchangeRequest> exchangeRequests = new ArrayList<>();
 
     public User(String name, String email) {
         this.name = name;
