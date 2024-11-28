@@ -1,1 +1,44 @@
-application.properties 내 정보를 본인에 맞게 수정하여 사용해야 합니다.
+# CH4. User-Currency 환전요청
+
+## Lv0. API 명세서, ERD, SQL 작성
+### API 명세서 작성 - postman 사용
+
+----
+### ERD 작성 - DB diagram 사용
+
+----
+### SQL 작성
+```
+-- User 테이블
+CREATE TABLE User (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(200) NOT NULL,
+email VARCHAR(200) NOT NULL UNIQUE,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Currency 테이블
+CREATE TABLE Currency (
+id INT AUTO_INCREMENT PRIMARY KEY,
+currency_name VARCHAR(200) NOT NULL,
+exchange_rate DECIMAL(10,2) NOT NULL,
+symbol VARCHAR(20) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- ExchangeRequest 테이블
+CREATE TABLE ExchangeRequest (
+id INT AUTO_INCREMENT PRIMARY KEY,
+user_id INT NOT NULL,
+currency_id INT NOT NULL,
+before_exchange DECIMAL(10,2) NOT NULL,
+after_exchange DECIMAL(10,2) NOT NULL,
+status VARCHAR(20) DEFAULT 'normal',
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+FOREIGN KEY (currency_id) REFERENCES Currency(id)
+);
+```
