@@ -5,6 +5,7 @@ import com.sparta.currency_user.dto.ExchangeResponseDto;
 import com.sparta.currency_user.entity.ExchangeRequest;
 import com.sparta.currency_user.service.ExchangeRequestService;
 import com.sparta.currency_user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ExchangeRequestController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<ExchangeResponseDto> createExchangeRequest(@RequestBody ExchangeRequestDto dto){
+    public ResponseEntity<ExchangeResponseDto> createExchangeRequest(@Valid @RequestBody ExchangeRequestDto dto){
         return ResponseEntity.ok(exchangeRequestService.createExchangeRequest(dto));
     }
 

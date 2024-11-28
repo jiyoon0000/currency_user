@@ -45,6 +45,7 @@ public class ExchangeRequestService {
     @Transactional
     public List<ExchangeResponseDto> findExchangeRequestsByUserId(Long userId){
         userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
         return exchangeRequestRepository.findAllByUserId(userId)
                 .stream()
                 .map(ExchangeResponseDto::new)
