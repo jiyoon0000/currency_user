@@ -25,23 +25,28 @@ public class ExchangeRequestService {
     private final UserRepository userRepository;
     private final CurrencyRepository currencyRepository;
 
+    //환전 요청 생성
     @Transactional
     public ExchangeResponseDto createExchangeRequest(ExchangeRequestDto dto){
+        //사용자와 통화 데이터 유효성 검사
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
         Currency currency = currencyRepository.findById(dto.getCurrencyId())
                 .orElseThrow(() -> new IllegalArgumentException("통화를 찾을 수 없습니다."));
 
+        //환전 후 금액 계산
         BigDecimal afterExchange = dto.getBeforeExchange()
                 .divide(currency.getExchangeRate(),2, RoundingMode.HALF_UP);
 
+        //요청 데이터 생성 및 저장
         ExchangeRequest exchangeRequest = new ExchangeRequest(user, currency, dto.getBeforeExchange(), afterExchange);
         exchangeRequestRepository.save(exchangeRequest);
 
         return new ExchangeResponseDto(exchangeRequest);
     }
 
+    //특정 사용자의 모든 환전 요청 조회
     @Transactional
     public List<ExchangeResponseDto> findExchangeRequestsByUserId(Long userId){
         userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
@@ -52,6 +57,7 @@ public class ExchangeRequestService {
                 .collect(Collectors.toList());
     }
 
+    //환전 요청 상태 업데이트
     @Transactional
     public ExchangeResponseDto updateExchangeRequestsStatus(Long id, ExchangeRequest.ExchangeStatus status){
         ExchangeRequest exchangeRequest = exchangeRequestRepository.findById(id)

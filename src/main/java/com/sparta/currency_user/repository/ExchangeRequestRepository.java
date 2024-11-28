@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ExchangeRequestRepository extends JpaRepository<ExchangeRequest, Long> {
+    //특정 사용자 id로 환전 요청 조회
     List<ExchangeRequest> findAllByUserId(Long userId);
 }
