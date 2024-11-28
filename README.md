@@ -2,7 +2,7 @@
 
 ## Lv0. API 명세서, ERD, SQL 작성
 ### API 명세서 작성 - postman 사용
-https://documenter.getpostman.com/view/39376424/2sAYBXAAAX#ca1ef8db-da49-498f-8028-9764d10d16b0
+https://documenter.getpostman.com/view/39376424/2sAYBXAAAX
 ----
 ### ERD 작성 - DB diagram 사용
 <img width="1259" alt="스크린샷 2024-11-28 오후 5 43 19" src="https://github.com/user-attachments/assets/4fe1da43-f432-4d36-a85c-2f5eb24dafb5">
