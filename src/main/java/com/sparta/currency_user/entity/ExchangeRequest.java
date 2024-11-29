@@ -1,7 +1,6 @@
 package com.sparta.currency_user.entity;
 
 import jakarta.persistence.*;
-import jdk.jshell.Snippet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
