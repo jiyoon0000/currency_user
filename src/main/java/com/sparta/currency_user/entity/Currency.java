@@ -18,14 +18,16 @@ public class Currency {
     private String currencyName;
     private BigDecimal exchangeRate;
     private String symbol;
+    private int decimalPlaces;
 
     @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExchangeRequest> exchangeRequests = new ArrayList<>();
 
-    public Currency(String currencyName, BigDecimal exchangeRate, String symbol) {
+    public Currency(String currencyName, BigDecimal exchangeRate, String symbol, int decimalPlaces) {
         this.currencyName = currencyName;
         this.exchangeRate = exchangeRate;
         this.symbol = symbol;
+        this.decimalPlaces = decimalPlaces;
     }
 
     public Currency() {}

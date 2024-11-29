@@ -35,6 +35,8 @@ public class ExchangeRequestService {
         Currency currency = currencyRepository.findById(dto.getCurrencyId())
                 .orElseThrow(() -> new IllegalArgumentException("통화를 찾을 수 없습니다."));
 
+        int decimalPlaces = currency.getDecimalPlaces();
+
         //환전 후 금액 계산
         BigDecimal afterExchange = dto.getBeforeExchange()
                 .divide(currency.getExchangeRate(),2, RoundingMode.HALF_UP);
