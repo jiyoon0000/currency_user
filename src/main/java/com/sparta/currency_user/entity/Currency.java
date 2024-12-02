@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +31,5 @@ public class Currency {
         this.decimalPlaces = decimalPlaces;
     }
 
-    public Currency() {}
+
 }

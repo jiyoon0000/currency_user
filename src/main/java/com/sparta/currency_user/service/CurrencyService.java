@@ -25,7 +25,11 @@ public class CurrencyService {
     }
 
     public List<CurrencyResponseDto> findAll() {
-        return currencyRepository.findAll().stream().map(CurrencyResponseDto::toDto).toList();
+        List<Currency> currencies = currencyRepository.findAll();
+        if(currencies.isEmpty()){
+            return List.of();
+        }
+        return currencies.stream().map(CurrencyResponseDto::toDto).toList();
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package com.sparta.currency_user.entity;
 
+import com.sparta.currency_user.enums.ExchangeStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,13 +63,5 @@ public class ExchangeRequest {
     //상태를 업데이트
     public void updateStatus(ExchangeStatus newStatus){
         this.status = newStatus;
-    }
-
-    //환전 요청의 상태를 나타내는 enum
-    //normal : 정상
-    //cancelled : 취소
-    public enum ExchangeStatus{
-        NORMAL,
-        CANCELLED
     }
 }

@@ -5,6 +5,7 @@ import com.sparta.currency_user.dto.ExchangeResponseDto;
 import com.sparta.currency_user.entity.Currency;
 import com.sparta.currency_user.entity.ExchangeRequest;
 import com.sparta.currency_user.entity.User;
+import com.sparta.currency_user.enums.ExchangeStatus;
 import com.sparta.currency_user.repository.CurrencyRepository;
 import com.sparta.currency_user.repository.ExchangeRequestRepository;
 import com.sparta.currency_user.repository.UserRepository;
@@ -35,11 +36,9 @@ public class ExchangeRequestService {
         Currency currency = currencyRepository.findById(dto.getCurrencyId())
                 .orElseThrow(() -> new IllegalArgumentException("통화를 찾을 수 없습니다."));
 
-        int decimalPlaces = currency.getDecimalPlaces();
-
         //환전 후 금액 계산
         BigDecimal afterExchange = dto.getBeforeExchange()
-                .divide(currency.getExchangeRate(),2, RoundingMode.HALF_UP);
+                .divide(currency.getExchangeRate(), currency.getDecimalPlaces(), RoundingMode.HALF_UP);
 
         //요청 데이터 생성 및 저장
         ExchangeRequest exchangeRequest = new ExchangeRequest(user, currency, dto.getBeforeExchange(), afterExchange);
@@ -61,7 +60,7 @@ public class ExchangeRequestService {
 
     //환전 요청 상태 업데이트
     @Transactional
-    public ExchangeResponseDto updateExchangeRequestsStatus(Long id, ExchangeRequest.ExchangeStatus status){
+    public ExchangeResponseDto updateExchangeRequestsStatus(Long id, ExchangeStatus status){
         ExchangeRequest exchangeRequest = exchangeRequestRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("요청을 찾을 수 없습니다."));
 

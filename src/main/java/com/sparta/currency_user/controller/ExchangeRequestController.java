@@ -3,6 +3,7 @@ package com.sparta.currency_user.controller;
 import com.sparta.currency_user.dto.ExchangeRequestDto;
 import com.sparta.currency_user.dto.ExchangeResponseDto;
 import com.sparta.currency_user.entity.ExchangeRequest;
+import com.sparta.currency_user.enums.ExchangeStatus;
 import com.sparta.currency_user.service.ExchangeRequestService;
 import com.sparta.currency_user.service.UserService;
 import jakarta.validation.Valid;
@@ -29,8 +30,8 @@ public class ExchangeRequestController {
 
     //특정 사용자의 모든 환전 요청 조회
     //사용자 아이디 -> 특정 사용자
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<ExchangeResponseDto>> findExchangeRequestsByUserId(@PathVariable Long userId){
+    @GetMapping
+    public ResponseEntity<List<ExchangeResponseDto>> findExchangeRequestsByUserId(@RequestParam Long userId){
         return ResponseEntity.ok(exchangeRequestService.findExchangeRequestsByUserId(userId));
     }
 
@@ -38,15 +39,8 @@ public class ExchangeRequestController {
     //status : normal, cancelled
     @PutMapping("/{id}")
     public ResponseEntity<ExchangeResponseDto> updateExchangeRequestsStatus(@PathVariable Long id,
-                                                                            @RequestParam ExchangeRequest.ExchangeStatus status){
+                                                                            @RequestBody ExchangeStatus status){
         return ResponseEntity.ok(exchangeRequestService.updateExchangeRequestsStatus(id, status));
     }
 
-    //삭제
-    //고객이 삭제될 때 해당 고객이 수행한 모든 환전 요청도 삭제
-    @DeleteMapping("/user/{userId}")
-    public ResponseEntity<String> deleteUserAndRequests(@PathVariable Long userId){
-        userService.deleteUserById(userId);
-        return ResponseEntity.ok("사용자와 관련 환전 요청이 삭제되었습니다.");
-    }
 }

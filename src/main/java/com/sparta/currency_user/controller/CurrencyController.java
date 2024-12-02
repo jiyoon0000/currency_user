@@ -17,6 +17,7 @@ public class CurrencyController {
 
     @GetMapping
     public ResponseEntity<List<CurrencyResponseDto>> findCurrencies() {
+        System.out.println("CurencyController.findCurrencies() 호출");
         return ResponseEntity.ok().body(currencyService.findAll());
     }
 
