@@ -2,6 +2,7 @@ package com.sparta.currency_user.service;
 
 import com.sparta.currency_user.dto.ExchangeRequestDto;
 import com.sparta.currency_user.dto.ExchangeResponseDto;
+import com.sparta.currency_user.dto.ExchangeSummaryDto;
 import com.sparta.currency_user.entity.Currency;
 import com.sparta.currency_user.entity.ExchangeRequest;
 import com.sparta.currency_user.entity.User;
@@ -67,5 +68,9 @@ public class ExchangeRequestService {
         exchangeRequest.updateStatus(status);
 
         return new ExchangeResponseDto(exchangeRequest);
+    }
+
+    public List<ExchangeSummaryDto> getExchangeSummaryByUser(){
+        return exchangeRequestRepository.findExchangeSummaryByUser();
     }
 }

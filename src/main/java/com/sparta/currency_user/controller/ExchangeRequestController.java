@@ -2,6 +2,7 @@ package com.sparta.currency_user.controller;
 
 import com.sparta.currency_user.dto.ExchangeRequestDto;
 import com.sparta.currency_user.dto.ExchangeResponseDto;
+import com.sparta.currency_user.dto.ExchangeSummaryDto;
 import com.sparta.currency_user.entity.ExchangeRequest;
 import com.sparta.currency_user.enums.ExchangeStatus;
 import com.sparta.currency_user.service.ExchangeRequestService;
@@ -19,7 +20,6 @@ import java.util.List;
 public class ExchangeRequestController {
 
     private final ExchangeRequestService exchangeRequestService;
-    private final UserService userService;
 
     //환전 요청 생성
     //valid로 dto에 대한 유효성 검사
@@ -33,6 +33,12 @@ public class ExchangeRequestController {
     @GetMapping
     public ResponseEntity<List<ExchangeResponseDto>> findExchangeRequestsByUserId(@RequestParam Long userId){
         return ResponseEntity.ok(exchangeRequestService.findExchangeRequestsByUserId(userId));
+    }
+
+    @GetMapping("/summary")
+    public ResponseEntity<List<ExchangeSummaryDto>> getExchangeSummaryByUser(){
+        List<ExchangeSummaryDto> summaries = exchangeRequestService.getExchangeSummaryByUser();
+        return ResponseEntity.ok(summaries);
     }
 
     //환전 요청 상태 업데이트
